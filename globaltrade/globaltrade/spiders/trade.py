@@ -40,7 +40,8 @@ class TradeSpider(scrapy.Spider):
         
         for sect in sec:
             table2=sect.css('td')[0].css('td ::text').extract()
-            
+            TradeSpider.item['page_url']=response.url
+
             if table2[0]=='About:':
                 about=sect.css('td')[1].css('p ::text').extract()
                 TradeSpider.item['about']=about
@@ -78,7 +79,8 @@ class TradeSpider(scrapy.Spider):
         
         TradeSpider.item['sub_title']=sub_titles
         
-        filename = 'results3.json' 
+        
+        filename = 'results4.json' 
         with open(filename, 'a+') as f:
             f.writelines(str(TradeSpider.item))
             f.write('\n')
